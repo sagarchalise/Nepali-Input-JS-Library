@@ -33,10 +33,19 @@ var NepInput = function(nepOptions){
         var layout = options.Layout;
         var ignoreLists = options.Ignore;
 
-        initiateEvent = function(){
-                if(opt.)
-
-            }
+        populateElements = function(){
+                var returnElements;
+                if(elementIds.constructor.toString().indexOf("Array") == -1){
+                    if(isForm){
+                        returnElements = {};
+                        for(var i =0; i < document.forms[elementIds].elements.length; i++){
+                            if(document.forms[elementIds].elements[i].type == "text" || document.forms[elementIds].elements[i].type == "textbox")
+                                returnElements[elementId].push(document.forms[elementIds].elements[i]);
+                            }
+                        }
+                    }
+                return returnElements;
+        }
 
         handleKeypress = function(event){
                 var pressed = event.keyCode || event.which; 
@@ -71,19 +80,19 @@ var NepInput = function(nepOptions){
                 }
                 event.preventDefault();
             };
+
+        var nepElements = populateElements();
         return {
                 init:  function(){
-                    if(isForm){
-                        initiateForForm(elementIds, ignoreLists);
-                    }
-                    else{
-                        intitiateForElements(elementsIds, ignoreLists);
-                        //document.getElementById(elementId).addEventListener("keypress", handleKeypress, false);
+                    for(var np in nepElements){
+                        nepElements[np].addEventListener("keypress", handleKeypress, false);
                     }
                 },
                 
                 destroy: function(){
-                    document.getElementById(elementId).removeEventListener("keypress", handleKeypress, false);
+                    for(var np in nepElements){
+                        nepElements[np].removeEventListener("keypress", handleKeypress, false);
+                    }
                 }
             };
 
