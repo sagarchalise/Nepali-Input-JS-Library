@@ -1,6 +1,8 @@
 (function($){
     var options;
+    var isForm = false;
     var _doNothing = false;
+
     var _keyUp = function(event){
         if(event.ctrlKey || event.altKey){
             _doNothing = false;
@@ -45,18 +47,30 @@
 
     $.fn.nepaliInput = function(opts){
         var defaults = {
+            "form": false,
             "keymap": nepaliKeymap,
             "layout": "romanized",
             "writing": "np",
             };
         options = $.extend(defaults, opts);
+
+        //var obj;
+        var obj = $(this);
+
+        if(options.form = true){
+            isForm = true;
+            if(this.tagName == "FORM"){
+                obj = $(this).find("textarea,input:text");
+            }
+        }
         if (options.writing !== "np"){
-            $(this).unbind("keypress keydown keyup");
+            obj.unbind("keypress keydown keyup");
             return true;
         }
-        $(this).unbind("keypress keydown keyup");
-        $(this).keyup(_keyUp);
-        $(this).keydown(_keyDown);
-        $(this).keypress(_keyPress);
+
+        obj.unbind("keypress keydown keyup");
+        obj.keyup(_keyUp);
+        obj.keydown(_keyDown);
+        obj.keypress(_keyPress);
     };
 })(jQuery);
