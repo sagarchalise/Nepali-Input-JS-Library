@@ -3,32 +3,6 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <title>Test for Nepali Input jQuery and Standalone</title>
         <script type="text/javascript" src="lib/nepLayout.js"></script>
-        <script type="text/javascript">
-            var selectType = document.getElementById("type");
-            selectType.onchange = function(){
-                var chosen = this.options[this.selectedIndex];
-                if("jq" == chosen.value){
-                document.write('<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>');
-                document.write('<script type="text/javascript" src="jQuery/nepaliInput.js"></script>');
-            }
-            else if("st" == chosen.value){
-                document.write('<script type="text/javascript" src="lib/nepaliInput.js"></script>');
-            }
-
-            }
-            var checkInput = document.getElementById("inp");
-            checkInput.onchange = function(){
-                var chosen = this.options[this.selectedIndex];
-                if("frm" == chosen.value){
-                document.write('<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>');
-                document.write('<script type="text/javascript" src="jQuery/nepaliInput.js"></script>');
-            }
-            else if("nFrm" == chosen.value){
-                document.write('<script type="text/javascript" src="lib/nepaliInput.js"></script>');
-            }
-
-            }
-        </script>
     </head>
     <body>
         <div class="">
@@ -39,21 +13,42 @@
         </select>
         <select name="inputs" id="inp">
             <option value="">Input Type/Form</option>
-            <option value="frm">Froms</option>
+            <option value="frm">Forms</option>
             <option value="nfrm">Non Forms</option>
         </select>
-        </div>
+        </div><br />
         <div id="myForm">
+
         <form action="" method="post">
-            <input type="text" name="frmInp" id="frmInp" />
-            <input type="text" name="frmInpAvd" id="frmInpAvoid" />
-            <textarea name="frmText" cols="50" rows="10" id="frmText" ></textarea>
+            <input type="text" name="frmInp" id="frmInp" /><br />
+            <input type="text" name="frmInpAvd" id="frmInpAvoid" /><br />
+            <textarea name="frmText" cols="50" rows="10" id="frmText" ></textarea><br />
             <input type="submit" value="" />
         </form>
         </div>
-        <div class="myNonForm">
-        <input type="text" name="nepInpTestText" id="nepInpTestText" />
-        <textarea name="nepInpTest" cols="50" rows="10" id="nepInpTest" ></textarea>
-        </div>
     </body>
+            <script type="text/javascript">
+            var selectType = document.getElementById("type");
+            selectType.onchange = function(){
+            var chosen = this.options[this.selectedIndex];
+            console.log(chosen.value);
+            if("jq" == chosen.value){
+                    var jq = document.createElement("script");
+                    jq.async = true;
+                    jq.src = "https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js";
+                    var jqN = document.createElement("script");
+                    jqN.src = "jQuery/nepaliInput.js";
+                    var s0 = document.getElementsByTagName('script')[0];
+                    s0.parentNode.insertBefore(jq, s0);
+                    s0.parentNode.insertBefore(jqN, s0);
+            }
+            else if("st" == chosen.value){
+                var jq = document.createElement("script");
+                jq.src="lib/nepaliInput.js";
+                var s0 = document.getElementsByTagName('script')[0];
+                s0.parentNode.insertBefore(jq, s0);
+                //s0.parentNode.insertBefore(jqN, s0);
+            }
+            };
+        </script>
 </html>
