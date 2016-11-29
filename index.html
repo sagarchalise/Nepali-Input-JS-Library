@@ -22,7 +22,7 @@
         </select>
             </div>
         </div>
-        <div id="myForm" class="row">
+        <div id="myForm" class="row hidden">
 
         <form action="" method="post" class="form">
             <div class="form-group">
@@ -54,7 +54,7 @@
             }
             else if("st" == chosen.value){
                 var jq = document.createElement("script");
-                jq.src="lib/nepaliInput.js";
+                jq.src="lib/nepInput.js";
                 var s0 = document.getElementsByTagName('script')[0];
                 s0.parentNode.insertBefore(jq, s0);
                 //s0.parentNode.insertBefore(jqN, s0);
